@@ -1,8 +1,8 @@
 // Site-wide settings. Change the brand name and links here; every page reads from this file.
 
 export const site = {
-  // Placeholder brand until the final name is decided.
-  brand: "UDG AUDIO",
+  // Brand name shown in the header, footer and page titles.
+  brand: "WAREZ AUDIO",
   tagline: "为自录自混的说唱制作者做的插件",
   authors: ["D4nN9", "Yibing He"],
   email: "", // support address, e.g. "support@example.com"; hidden while empty

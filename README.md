@@ -61,3 +61,8 @@ npm run build      # 上线前检查
 - 首页的 SPIKE MIX HUB 面板是用插件原始底图（`panel.webp`）加 SVG 和 Canvas 在网页里重画的，坐标取自插件源码，可以拖旋钮、切模式、点 BYPASS、换预设。
 
 作者：D4nN9、Yibing He
+
+## 本地预览（不需要服务器）
+
+`npm run preview:build` 会生成 `preview/` 文件夹：整站的静态副本，结算和上线提醒在浏览器里模拟，不连服务器。
+把文件夹拷到 Mac 上，双击 `打开预览.command`（第一次可能要右键 → 打开），浏览器会打开 http://localhost:4173 。

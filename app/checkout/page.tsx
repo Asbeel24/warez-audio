@@ -4,7 +4,32 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useCart } from "@/components/cart";
-import { formatPrice } from "@/lib/products";
+import { formatPrice, getProduct } from "@/lib/products";
+import { newOrderId } from "@/lib/payments";
+
+// The static preview has no server, so the order is made in the browser instead.
+const PREVIEW = process.env.NEXT_PUBLIC_STATIC_PREVIEW === "1";
+
+function previewOrder(p: { email: string; name: string; method: string; items: string[] }) {
+  const lines = p.items
+    .map((s) => getProduct(s))
+    .filter((x) => !!x && x.price)
+    .map((x) => ({ slug: x!.slug, name: x!.name, price: x!.price! }));
+  return {
+    paymentUrl: null,
+    order: {
+      id: newOrderId(),
+      email: p.email,
+      name: p.name || undefined,
+      method: p.method,
+      lines,
+      total: lines.reduce((n, l) => n + l.price, 0),
+      currency: "CNY",
+      status: "pending_payment",
+      createdAt: new Date().toISOString(),
+    },
+  };
+}
 
 const METHODS = [
   { id: "wechat", label: "微信支付" },
@@ -30,13 +55,18 @@ export default function Checkout() {
     if (!agree) return setErr("请先勾选同意授权条款。");
     setBusy(true);
     try {
-      const r = await fetch("/api/checkout", {
-        method: "POST",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify({ email, name, method, items: items.map((p) => p.slug) }),
-      });
-      const data = await r.json();
-      if (!r.ok) throw new Error(data.error);
+      const payload = { email, name, method, items: items.map((p) => p.slug) };
+      const data = PREVIEW
+        ? previewOrder(payload)
+        : await fetch("/api/checkout", {
+            method: "POST",
+            headers: { "content-type": "application/json" },
+            body: JSON.stringify(payload),
+          }).then(async (r) => {
+            const d = await r.json();
+            if (!r.ok) throw new Error(d.error);
+            return d;
+          });
       if (data.paymentUrl) {
         window.location.href = data.paymentUrl;
         return;

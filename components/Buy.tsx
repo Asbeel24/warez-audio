@@ -71,6 +71,10 @@ export function WaitlistForm({ product }: { product: string }) {
     e.preventDefault();
     setState("sending");
     try {
+      if (process.env.NEXT_PUBLIC_STATIC_PREVIEW === "1") {
+        setState("done");
+        return;
+      }
       const r = await fetch("/api/waitlist", {
         method: "POST",
         headers: { "content-type": "application/json" },
