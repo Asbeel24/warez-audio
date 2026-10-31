@@ -51,7 +51,7 @@ export default function Checkout() {
   async function submit(e: React.FormEvent) {
     e.preventDefault();
     setErr(null);
-    if (email.trim() !== email2.trim()) return setErr("两次输入的邮箱不一样，序列号会发到这个邮箱，请再核对一下。");
+    if (email.trim() !== email2.trim()) return setErr("两次输入的邮箱不一样，下载链接会发到这个邮箱，请再核对一下。");
     if (!agree) return setErr("请先勾选同意授权条款。");
     setBusy(true);
     try {
@@ -102,7 +102,7 @@ export default function Checkout() {
           <h1 className="h2">填写信息</h1>
 
           <fieldset>
-            <legend>1 · 接收序列号的邮箱</legend>
+            <legend>1 · 接收下载链接的邮箱</legend>
             <div className="field">
               <label htmlFor="email">邮箱</label>
               <input id="email" className="input" type="email" required autoComplete="email" value={email} onChange={(e) => setEmail(e.target.value)} />
@@ -112,7 +112,7 @@ export default function Checkout() {
               <input id="email2" className="input" type="email" required autoComplete="off" value={email2} onChange={(e) => setEmail2(e.target.value)} />
             </div>
             <div className="field">
-              <label htmlFor="name">称呼（选填，会写在授权里）</label>
+              <label htmlFor="name">称呼（选填）</label>
               <input id="name" className="input" autoComplete="name" value={name} onChange={(e) => setName(e.target.value)} />
             </div>
           </fieldset>
@@ -159,7 +159,7 @@ export default function Checkout() {
             <span>合计</span>
             <strong>{formatPrice(total)}</strong>
           </div>
-          <p className="muted small">数字商品，付款后通过邮件发送下载链接和序列号。</p>
+          <p className="muted small">数字商品，付款后通过邮件发送下载链接。</p>
         </aside>
       </div>
     </section>

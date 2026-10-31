@@ -25,7 +25,7 @@ export default function Footer() {
             <div>
               <h4>支持</h4>
               <Link href="/support">安装与常见问题</Link>
-              <Link href="/support#license">授权与激活</Link>
+              <Link href="/support#license">授权说明</Link>
               <Link href="/support#refund">退款</Link>
               {site.email && <a href={`mailto:${site.email}`}>{site.email}</a>}
             </div>

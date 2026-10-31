@@ -28,7 +28,7 @@ function Inner() {
         {order ? `，合计 ${formatPrice(order.total)}` : ""}。
       </p>
       <p className="co-note">
-        支付通道还在接入中，这一步目前只用来测试流程，没有发生扣款。正式上线后，这里会显示付款结果，序列号和下载链接会发到{" "}
+        支付通道还在接入中，这一步目前只用来测试流程，没有发生扣款。正式上线后，这里会显示付款结果，下载链接会发到{" "}
         {order?.email ?? "你的邮箱"}。
       </p>
       <div className="hero-ctas">

@@ -39,16 +39,17 @@ export const products: Product[] = [
   {
     slug: "hardick",
     name: "HARDICK",
-    short: "产品介绍整理中",
-    summary: "HARDICK 的介绍、界面图和试听正在整理，很快上线。",
+    short: "让 808 站起来。一个旋钮的管子饱和",
+    summary:
+      "挂在 808、Kick 或者鼓组总线上，一拧就是更暖、更厚、更响。808 在手机外放上也听得见，峰值守在 −1 dBFS。",
     status: "on-sale",
+    // Price still to be decided (¥199 vs a ¥39–59 launch price).
     price: 199,
     formats: ["VST3", "AU"],
     platforms: ["macOS", "Windows"],
-    image: "",
-    imageAlt: "HARDICK",
-    accent: "#e8e8e3",
-    draft: true,
+    image: "/media/hardick/ui-050-1000.webp",
+    imageAlt: "HARDICK 插件界面",
+    accent: "#77AEB1",
   },
   {
     slug: "udg",
